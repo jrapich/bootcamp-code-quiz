@@ -1,11 +1,11 @@
 //lets declare all the things
-var startButton = document.querySelector(".confirm");
-var defaultQuestions = document.querySelector("#questionsDefault");
-var defaultAnswers = document.querySelector("#answersDefault");
-var displayedQuestion = document.querySelector("#questionsDisplay");
-var displayedAnswers = document.querySelector("#answersDisplay");
+let startButton = document.querySelector(".confirm");
+let defaultQuestions = document.querySelector("#questionsDefault");
+let defaultAnswers = document.querySelector("#answersDefault");
+let displayedQuestion = document.querySelector("#questionsDisplay");
+let displayedAnswers = document.querySelector("#answersDisplay");
 
-//function to hide the default text on starting page, an replace it with questions/answers
+//function to hide the default text on starting page, and replace it with questions/answers
 function hideDefaultText() {
     defaultQuestions.setAttribute("style", "display:none");
     defaultAnswers.setAttribute("style", "display:none");
@@ -13,15 +13,24 @@ function hideDefaultText() {
     displayedAnswers.setAttribute("style", "display:block");
 }
 
-//start the quiz timer
+//start the quiz timer, display the time remaining, and then remove the time remaining when time runs out
 function startTimer() {
-    var timer = 120
-    var timerInterval = setInterval(function() {
+    let headerElem = document.querySelector("header");
+    let timer = 121;
+    let timerText = document.createElement("div");
+    let timerElem = document.createElement("span");
+    let timerInterval = setInterval(function() {
         timer--;
+        timerElem.textContent = timer;
         if(timer === 0) {
           clearInterval(timerInterval);
+          timerText.setAttribute("style", "display:none");
+          timerElem.setAttribute("style", "display:none");
         }
     }, 1000);
+    timerText.textContent = "Seconds Remaining:"
+    headerElem.appendChild(timerText);
+    headerElem.appendChild(timerElem);
 }
 
 //event listener for when user clicks the begin quiz button
