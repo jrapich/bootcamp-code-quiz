@@ -25,6 +25,15 @@ header {
     max-width: 600px;
 }
 
+.questionsDisplay {
+    max-width: 600px;
+    display:hidden;
+}
+
+.answersDisplay {
+    max-width: 600px;
+}
+
 .confirm {
     text-align: center;
 }
