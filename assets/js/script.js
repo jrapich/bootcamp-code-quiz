@@ -13,3 +13,5 @@ startButton.addEventListener("click", function(event) {
     displayedQuestion.textContent = randomQuestion();
     displayedAnswers.textContent = listAnswers();
 })
+
+console.log(displayedQuestion);
