@@ -1,0 +1,30 @@
+.container {
+    padding:40px;
+}
+
+main {
+    font-size: 20px;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:20px;
+    border-style: dashed;
+}
+
+header {
+    text-align: center;
+}
+
+.questions {
+    max-width: 600px;
+}
+
+.answers {
+    max-width: 600px;
+}
+
+.confirm {
+    text-align: center;
+}
