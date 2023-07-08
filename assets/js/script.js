@@ -118,13 +118,12 @@ function startTimer() {
 //TODO: add logic to determine if a question was already used, skip question if true
 function randomQuestion(){
     gameData.randomNumber = Math.floor(Math.random() * gameData.questions.length);
-    gameData.chosenQuestion = gameData.questions[gameData.randomNumber];
-    return gameData.chosenQuestion;
+    return gameData.randomNumber;
 }
 
 //list the possible answers to the question chosen above
 function listAnswers(question) {
-    
+        
 }
 
 //event listener for when user clicks the begin quiz button
@@ -132,12 +131,14 @@ function listAnswers(question) {
 startButton.addEventListener("click", function(event) {
     //not sure if I even need preventDefault here
     event.preventDefault();
-    var chosenQuestion;
+    let chosenQuestion;
+    let questionNumber;
     hideDefaultText();
     startTimer();
-    chosenQuestion = randomQuestion();
+    questionNumber = randomQuestion();
+    chosenQuestion = gameData.questions[questionNumber];
     displayedQuestion.textContent = chosenQuestion;
-    displayedAnswers.textContent = listAnswers(chosenQuestion);
+    displayedAnswers.textContent = listAnswers(questionNumber);
 })
 
 
