@@ -33,14 +33,39 @@ function startTimer() {
     headerElem.appendChild(timerElem);
 }
 
+//choose a random question to display to the user
+function randomQuestion(){
+    const questionsObj = {
+        questions: [
+            "placeholder 0",
+            "placeholder 1",
+            "placeholder 2",
+            "placeholder 3",
+            "placeholder 4",
+            "placeholder 5",
+            "placeholder 6",
+            "placeholder 7",
+            "placeholder 8",
+            "placeholder 9",
+        ],
+        randomNumber: 0,
+        chosenQuestion: "",
+        isQuestionUsed: []
+    }
+    questionsObj.randomNumber = Math.floor(Math.random() * questionsObj.questions.length);
+    questionsObj.chosenQuestion = questionsObj.questions[questionsObj.randomNumber];
+    return questionsObj.chosenQuestion;
+}
+
 //event listener for when user clicks the begin quiz button
 //will display a question and a list of answers
 startButton.addEventListener("click", function(event) {
+    //not sure if I even need preventDefault here
     event.preventDefault();
     hideDefaultText();
     startTimer();
     displayedQuestion.textContent = randomQuestion();
-    displayedAnswers.textContent = listAnswers();
+    //displayedAnswers.textContent = listAnswers();
 })
 
 
