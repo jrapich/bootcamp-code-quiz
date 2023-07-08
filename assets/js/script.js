@@ -5,6 +5,87 @@ let defaultAnswers = document.querySelector("#answersDefault");
 let displayedQuestion = document.querySelector("#questionsDisplay");
 let displayedAnswers = document.querySelector("#answersDisplay");
 
+//massive object that contains all data needed for the gameshow
+const gameData = {
+    questions: [
+        "placeholder 0",
+        "placeholder 1",
+        "placeholder 2",
+        "placeholder 3",
+        "placeholder 4",
+        "placeholder 5",
+        "placeholder 6",
+        "placeholder 7",
+        "placeholder 8",
+        "placeholder 9",
+    ],
+    randomNumber: 0,
+    chosenQuestion: "",
+    isQuestionUsed: [],
+    answers: {
+        answer0: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer1: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer2: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer3: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer4: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer5: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer6: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer7: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer8: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ],
+        answer9: [
+            "placeholder0",
+            "placeholder1",
+            "placeholder2",
+            "placeholder3"
+        ]
+    }
+}
+
 //function to hide the default text on starting page, and replace it with questions/answers
 function hideDefaultText() {
     defaultQuestions.setAttribute("style", "display:none");
@@ -34,27 +115,16 @@ function startTimer() {
 }
 
 //choose a random question to display to the user
+//TODO: add logic to determine if a question was already used, skip question if true
 function randomQuestion(){
-    const questionsObj = {
-        questions: [
-            "placeholder 0",
-            "placeholder 1",
-            "placeholder 2",
-            "placeholder 3",
-            "placeholder 4",
-            "placeholder 5",
-            "placeholder 6",
-            "placeholder 7",
-            "placeholder 8",
-            "placeholder 9",
-        ],
-        randomNumber: 0,
-        chosenQuestion: "",
-        isQuestionUsed: []
-    }
-    questionsObj.randomNumber = Math.floor(Math.random() * questionsObj.questions.length);
-    questionsObj.chosenQuestion = questionsObj.questions[questionsObj.randomNumber];
-    return questionsObj.chosenQuestion;
+    gameData.randomNumber = Math.floor(Math.random() * gameData.questions.length);
+    gameData.chosenQuestion = gameData.questions[gameData.randomNumber];
+    return gameData.chosenQuestion;
+}
+
+//list the possible answers to the question chosen above
+function listAnswers(question) {
+    
 }
 
 //event listener for when user clicks the begin quiz button
@@ -62,10 +132,12 @@ function randomQuestion(){
 startButton.addEventListener("click", function(event) {
     //not sure if I even need preventDefault here
     event.preventDefault();
+    var chosenQuestion;
     hideDefaultText();
     startTimer();
-    displayedQuestion.textContent = randomQuestion();
-    //displayedAnswers.textContent = listAnswers();
+    chosenQuestion = randomQuestion();
+    displayedQuestion.textContent = chosenQuestion;
+    displayedAnswers.textContent = listAnswers(chosenQuestion);
 })
 
 
