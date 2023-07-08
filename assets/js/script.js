@@ -1,7 +1,7 @@
 //lets declare all the things
 var startButton = document.querySelector(".confirm");
-var displayedQuestion = document.querySelector(".questions");
-var displayedAnswers = document.querySelector(".answers");
+var displayedQuestion = document.querySelector("#questionsDefault");
+var displayedAnswers = document.querySelector("#answersDefault");
 
 
 //event listener for when user clicks the begin quiz button

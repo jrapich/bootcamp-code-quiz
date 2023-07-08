@@ -17,11 +17,11 @@ header {
     text-align: center;
 }
 
-.questions {
+.questionsDefault {
     max-width: 600px;
 }
 
-.answers {
+.answersDefault {
     max-width: 600px;
 }
 
