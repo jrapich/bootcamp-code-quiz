@@ -17,21 +17,22 @@ header {
     text-align: center;
 }
 
-.questionsDefault {
+#questionsDefault {
     max-width: 600px;
 }
 
-.answersDefault {
+#answersDefault {
     max-width: 600px;
 }
 
-.questionsDisplay {
+#questionsDisplay {
     max-width: 600px;
-    display:hidden;
+    display:none
 }
 
-.answersDisplay {
+#answersDisplay {
     max-width: 600px;
+    display:none
 }
 
 .confirm {
