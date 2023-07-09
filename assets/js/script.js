@@ -4,6 +4,18 @@ let defaultQuestions = document.querySelector("#questionsDefault");
 let defaultAnswers = document.querySelector("#answersDefault");
 let displayedQuestion = document.querySelector("#questionsDisplay");
 let displayedAnswers = document.querySelector("#answersDisplay");
+let answer0 = document.querySelector("#answer0");
+let answer1 = document.querySelector("#answer1");
+let answer2 = document.querySelector("#answer2");
+let answer3 = document.querySelector("#answer3");
+let answer0p = answer0.querySelector("p");
+let answer1p = answer1.querySelector("p");
+let answer2p = answer2.querySelector("p");
+let answer3p = answer3.querySelector("p");
+let answer0span = answer0.querySelector("span");
+let answer1span = answer1.querySelector("span");
+let answer2span = answer2.querySelector("span");
+let answer3span = answer3.querySelector("span");
 
 //massive object that contains all data needed for the gameshow
 const gameData = {
@@ -121,9 +133,12 @@ function randomQuestion(){
     return gameData.randomNumber;
 }
 
-//list the possible answers to the question chosen above
+//list the possible answers to the question chosen
 function listAnswers(question) {
-        
+    answer0p.textContent = question;
+    answer1p.textContent = question;
+    answer2p.textContent = question;
+    answer3p.textContent = question;
 }
 
 //event listener for when user clicks the begin quiz button
@@ -138,7 +153,7 @@ startButton.addEventListener("click", function(event) {
     questionNumber = randomQuestion();
     chosenQuestion = gameData.questions[questionNumber];
     displayedQuestion.textContent = chosenQuestion;
-    displayedAnswers.textContent = listAnswers(questionNumber);
+    listAnswers(questionNumber);
 })
 
 
