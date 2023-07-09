@@ -12,10 +12,11 @@ let answer0p = answer0.querySelector("p");
 let answer1p = answer1.querySelector("p");
 let answer2p = answer2.querySelector("p");
 let answer3p = answer3.querySelector("p");
-let answer0span = answer0.querySelector("span");
-let answer1span = answer1.querySelector("span");
-let answer2span = answer2.querySelector("span");
-let answer3span = answer3.querySelector("span");
+let answer0Btn = answer0.querySelector("span");
+let answer1Btn = answer1.querySelector("span");
+let answer2Btn = answer2.querySelector("span");
+let answer3Btn = answer3.querySelector("span");
+let answerBtnArray = [answer0Btn, answer1Btn, answer2Btn, answer3Btn];
 
 //massive object that contains all data needed for the gameshow
 const gameData = {
@@ -145,7 +146,8 @@ function randomQuestion(){
     //im sure there are easier ways of doing this. maybe ill discover them as i get more experience.
 function listAnswers(question) {
     let ansArray;
-    let testArray = Object.entries(gameData.answers); 
+    let testArray = Object.entries(gameData.answers);
+    let createBtn;
     ansArray = testArray[question];
     console.log(testArray);
     ansArray = ansArray[1];
@@ -153,6 +155,19 @@ function listAnswers(question) {
     answer1p.textContent = ansArray[1];
     answer2p.textContent = ansArray[2];
     answer3p.textContent = ansArray[3];
+    //add a clickable button to each of these answers
+        //first time I tried this it only added one button, so lets make a for loop
+    for (let i=0; 0 < 3; i++) {
+        createBtn = document.createElement("button");
+        createBtn.textContent = "Choose";
+        answerBtnArray[i].appendChild(createBtn);
+    }
+
+    // createBtn.textContent = "Choose";
+    // answer0Btn.appendChild(createBtn);
+    // answer1Btn.appendChild(createBtn);
+    // answer2Btn.appendChild(createBtn);
+    // //answer3Btn.appendChild(createBtn);
 }
 
 //event listener for when user clicks the begin quiz button
