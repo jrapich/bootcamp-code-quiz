@@ -96,14 +96,14 @@ const gameData = {
             "placeholder3"
         ]
     }
-}
+} 
 
 //function to hide the default text on starting page, and replace it with questions/answers
 function hideDefaultText() {
     defaultQuestions.setAttribute("style", "display:none");
     defaultAnswers.setAttribute("style", "display:none");
     displayedQuestion.setAttribute("style", "display:block");
-    displayedAnswers.setAttribute("style", "display:block");
+    displayedAnswers.setAttribute("style", "display:flex;    flex-direction:column;");
 }
 
 //start the quiz timer, display the time remaining, and then remove the time remaining when time runs out
@@ -134,11 +134,25 @@ function randomQuestion(){
 }
 
 //list the possible answers to the question chosen
+    //this part took a bit of trial and error and is a bit tricky, to me at least
+    //first, the answers to each question are stored as arrays in gameData.answers as an object,
+    //which is itself stored in object gameData
+    //then, object.entries puts that entire object gameData.answers into an array, 
+    //with each index of that array serving as also more arrays which contain answers to that specific index question
+    //question parameter in this functiomn passes the random number to that array(same number that picks the question too)
+    //which creates a final array ansArray, which then can be called to display each of the answers.
+    //whew! im proud of this one, it took me quite a bit of experimentation to figure out.
+    //im sure there are easier ways of doing this. maybe ill discover them as i get more experience.
 function listAnswers(question) {
-    answer0p.textContent = question;
-    answer1p.textContent = question;
-    answer2p.textContent = question;
-    answer3p.textContent = question;
+    let ansArray;
+    let testArray = Object.entries(gameData.answers); 
+    ansArray = testArray[question];
+    console.log(testArray);
+    ansArray = ansArray[1];
+    answer0p.textContent = ansArray[0];
+    answer1p.textContent = ansArray[1];
+    answer2p.textContent = ansArray[2];
+    answer3p.textContent = ansArray[3];
 }
 
 //event listener for when user clicks the begin quiz button
