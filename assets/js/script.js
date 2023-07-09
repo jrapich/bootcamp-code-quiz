@@ -148,8 +148,8 @@ function listAnswers(question) {
     let ansArray;
     let testArray = Object.entries(gameData.answers);
     let createBtn;
+    let clickableButton = [];
     ansArray = testArray[question];
-    console.log(testArray);
     ansArray = ansArray[1];
     answer0p.textContent = ansArray[0];
     answer1p.textContent = ansArray[1];
@@ -157,17 +157,25 @@ function listAnswers(question) {
     answer3p.textContent = ansArray[3];
     //add a clickable button to each of these answers
         //first time I tried this it only added one button, so lets make a for loop
-    for (let i=0; 0 < 3; i++) {
+    for (let i=0; i < answerBtnArray.length; i++) {
         createBtn = document.createElement("button");
         createBtn.textContent = "Choose";
+        createBtn.setAttribute("class", "tempButton");
         answerBtnArray[i].appendChild(createBtn);
+        clickableButton.push(answerBtnArray[i].querySelector("button"));
+    } 
+    //add an event listener for each clickable button
+    function nextQuestion() {
+        for (let j=0; j < clickableButton.length; j++) {
+            clickableButton[j].addEventListener("click", function(event) {
+                console.log("answer chosen, next question...");
+                questionNumber = randomQuestion();
+                console.log("next question number is " + questionNumber);
+                nextAnswers(questionNumber);
+            })
+        }    
     }
-
-    // createBtn.textContent = "Choose";
-    // answer0Btn.appendChild(createBtn);
-    // answer1Btn.appendChild(createBtn);
-    // answer2Btn.appendChild(createBtn);
-    // //answer3Btn.appendChild(createBtn);
+    nextQuestion();
 }
 
 //event listener for when user clicks the begin quiz button
