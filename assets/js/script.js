@@ -20,16 +20,8 @@ let answer3Btn = answer3.querySelector("span");
 let answerBtnArray = [answer0Btn, answer1Btn, answer2Btn, answer3Btn];
 let clickableButton = [];
 let firstQuestion;
-
-
-//ideas
-// for loop:
-    //create question
-    //display question
-    //listen for answer
-
-
-//massive object that contains all data needed for the gameshow
+//object that contains all data needed for the gameshow
+//this used to bigger and more complex logic but trimmed a lot of it to save uneeded complexity
 const gameData = {
     timer: 121,
     isGameEnded: false,
