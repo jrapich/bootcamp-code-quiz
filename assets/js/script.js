@@ -1,4 +1,5 @@
 //lets declare all the things
+let quizSpace = document.querySelector("main");
 let startButton = document.querySelector(".confirm");
 let defaultQuestions = document.querySelector("#questionsDefault");
 let defaultAnswers = document.querySelector("#answersDefault");
@@ -30,6 +31,7 @@ let firstQuestion;
 
 //massive object that contains all data needed for the gameshow
 const gameData = {
+    timer: 121,
     isGameEnded: false,
     questions: [
         "placeholder 0",
@@ -119,13 +121,12 @@ function hideDefaultText() {
 //start the quiz timer, display the time remaining, and then remove the time remaining when time runs out
 function startTimer() {
     let headerElem = document.querySelector("header");
-    let timer = 121;
     let timerText = document.createElement("div");
     let timerElem = document.createElement("span");
     let timerInterval = setInterval(function() {
-        timer--;
-        timerElem.textContent = timer;
-        if(timer === 0) {
+        timerElem.textContent = gameData.timer;
+        gameData.timer--;
+        if(gameData.timer === 0) {
           clearInterval(timerInterval);
           timerText.setAttribute("style", "display:none");
           timerElem.setAttribute("style", "display:none");
@@ -134,6 +135,7 @@ function startTimer() {
     timerText.textContent = "Seconds Remaining:"
     headerElem.appendChild(timerText);
     headerElem.appendChild(timerElem);
+    quizSpace.removeChild(startButton); 
 }
 
 
