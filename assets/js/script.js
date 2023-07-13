@@ -43,21 +43,7 @@ const gameData = {
         "placeholder 8",
         "placeholder 9",
     ],
-    randomNumber: 0,
     answered: 0,
-    chosenQuestion: "",
-    isQuestionUsed: {
-        question0: false,
-        question1: false,
-        question2: false,
-        question3: false,
-        question4: false,
-        question5: false,
-        question6: false,
-        question7: false,
-        question8: false,
-        question9: false,
-    },
     answers: {
         answer0: [
             "placeholder0",
