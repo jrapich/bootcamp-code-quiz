@@ -17,9 +17,19 @@ let answer1Btn = answer1.querySelector("span");
 let answer2Btn = answer2.querySelector("span");
 let answer3Btn = answer3.querySelector("span");
 let answerBtnArray = [answer0Btn, answer1Btn, answer2Btn, answer3Btn];
+let clickableButton = [];
+
+
+//ideas
+// for loop:
+    //create question
+    //display question
+    //listen for answer
+
 
 //massive object that contains all data needed for the gameshow
 const gameData = {
+    isGameEnded: false,
     questions: [
         "placeholder 0",
         "placeholder 1",
@@ -33,8 +43,20 @@ const gameData = {
         "placeholder 9",
     ],
     randomNumber: 0,
+    answered: 0,
     chosenQuestion: "",
-    isQuestionUsed: [],
+    isQuestionUsed: {
+        question0: false,
+        question1: false,
+        question2: false,
+        question3: false,
+        question4: false,
+        question5: false,
+        question6: false,
+        question7: false,
+        question8: false,
+        question9: false,
+    },
     answers: {
         answer0: [
             "placeholder0",
@@ -131,6 +153,41 @@ function startTimer() {
 //TODO: add logic to determine if a question was already used, skip question if true
 function randomQuestion(){
     gameData.randomNumber = Math.floor(Math.random() * gameData.questions.length);
+    switch(gameData.randomNumber) {
+        case 0:
+            gameData.isQuestionUsed.question0 =true;
+            break;
+        case 1:
+            gameData.isQuestionUsed.question1 =true;
+            break;
+        case 2:
+            gameData.isQuestionUsed.question2 =true;
+            break;
+        case 3:
+            gameData.isQuestionUsed.question3 =true;
+            break;
+        case 4:
+            gameData.isQuestionUsed.question4 =true;
+            break;
+        case 5:
+            gameData.isQuestionUsed.question5 =true;
+            break;
+        case 6:
+            gameData.isQuestionUsed.question6 =true;
+            break;
+        case 7:
+            gameData.isQuestionUsed.question7 =true;
+            break;
+        case 8:
+            gameData.isQuestionUsed.question8 =true;
+            break;
+        case 9:
+            gameData.isQuestionUsed.question9 =true;
+            break;
+        default:
+            console.log("all possible questions used, ending game");
+            gameData.isGameEnded = true;
+    }
     return gameData.randomNumber;
 }
 
@@ -148,13 +205,13 @@ function listAnswers(question) {
     let ansArray;
     let testArray = Object.entries(gameData.answers);
     let createBtn;
-    let clickableButton = [];
     ansArray = testArray[question];
     ansArray = ansArray[1];
     answer0p.textContent = ansArray[0];
     answer1p.textContent = ansArray[1];
     answer2p.textContent = ansArray[2];
     answer3p.textContent = ansArray[3];
+    gameData.answered++;
     //add a clickable button to each of these answers
         //first time I tried this it only added one button, so lets make a for loop
     for (let i=0; i < answerBtnArray.length; i++) {
@@ -164,20 +221,120 @@ function listAnswers(question) {
         answerBtnArray[i].appendChild(createBtn);
         clickableButton.push(answerBtnArray[i].querySelector("button"));
     } 
-    //add an event listener for each clickable button
-    function nextQuestion() {
-        for (let j=0; j < clickableButton.length; j++) {
-            clickableButton[j].addEventListener("click", function(event) {
-                console.log("answer chosen, next question...");
-                questionNumber = randomQuestion();
-                console.log("next question number is " + questionNumber);
-                nextAnswers(questionNumber);
-            })
-        }    
-    }
     nextQuestion();
 }
+//add an event listener for each clickable button in the quiz
+function nextQuestion() {
+    for (let j=0; j < clickableButton.length; j++) {
+        clickableButton[j].addEventListener("click", function(event) {
+            console.log("answer chosen, next question...");
+            questionNumber = randomQuestion();
+            console.log("next question number is " + questionNumber);
+            nextAnswer(nextAnswerPicker(questionNumber));
+        })
+    }    
+}
 
+//when the user picks an answer, show the next question and answers
+//check if the question has been used already and if so, pick a different one
+function nextAnswerPicker(pickedQ) {
+    let checkNumber;
+    console.log(pickedQ === 0 && gameData.isQuestionUsed.question0)
+    if (pickedQ === 0 && gameData.isQuestionUsed.question0) {
+        checkNumber = 0;
+        return checkNumber;
+    } else if (pickedQ === 1 && gameData.isQuestionUsed.question1) {
+        checkNumber = 1;
+        return checkNumber;
+    } else if (pickedQ === 2 && gameData.isQuestionUsed.question2) {
+        checkNumber = 2;
+        return checkNumber;
+    } else if (pickedQ === 3 && gameData.isQuestionUsed.question3) {
+        checkNumber = 3;
+        return checkNumber;
+    } else if (pickedQ === 4 && gameData.isQuestionUsed.question4) {
+        checkNumber = 4;
+        return checkNumber;
+    } else if (pickedQ === 5 && gameData.isQuestionUsed.question5) {
+        checkNumber = 5;
+        return checkNumber;
+    } else if (pickedQ === 6 && gameData.isQuestionUsed.question6) {
+        checkNumber = 6;
+        return checkNumber;
+    } else if (pickedQ === 7 && gameData.isQuestionUsed.question7) {
+        checkNumber = 7;
+        return checkNumber;
+    } else if (pickedQ === 8 && gameData.isQuestionUsed.question8) {
+        checkNumber = 8;
+        return checkNumber;
+    } else if (pickedQ === 9 && gameData.isQuestionUsed.question9) {
+        checkNumber = 9;
+        return checkNumber;
+    } else {
+        for (l=0; l < 1000, l++;) {
+            console.log("this has looped " + l + " times")
+            checkNumber =  nextAnswerPicker(randomQuestion());
+        }
+    }
+    switch(pickedQ) {
+        case 0:
+            gameData.isQuestionUsed.question0 =true;
+            break;
+        case 1:
+            gameData.isQuestionUsed.question1 =true;
+            break;
+        case 2:
+            gameData.isQuestionUsed.question2 =true;
+            break;
+        case 3:
+            gameData.isQuestionUsed.question3 =true;
+            break;
+        case 4:
+            gameData.isQuestionUsed.question4 =true;
+            break;
+        case 5:
+            gameData.isQuestionUsed.question5 =true;
+            break;
+        case 6:
+            gameData.isQuestionUsed.question6 =true;
+            break;
+        case 7:
+            gameData.isQuestionUsed.question7 =true;
+            break;
+        case 8:
+            gameData.isQuestionUsed.question8 =true;
+            break;
+        case 9:
+            gameData.isQuestionUsed.question9 =true;
+            break;
+        default:
+            console.log("all possible questions used, ending game");
+            gameData.isGameEnded = true;
+    }
+    console.log(checkNumber);
+    return checkNumber;
+}
+
+function nextAnswer(verifiedQ) {
+    let ansArray;
+    let testArray = Object.entries(gameData.answers);
+    if (gameData.isGameEnded) {
+        gameOver();
+    } else  {
+        console.log(verifiedQ);
+        ansArray = testArray[verifiedQ];
+        ansArray = ansArray[1];
+        answer0p.textContent = ansArray[0];
+        answer1p.textContent = ansArray[1];
+        answer2p.textContent = ansArray[2];
+        answer3p.textContent = ansArray[3];
+        displayedQuestion.textContent = gameData.questions[verifiedQ];
+        gameData.answered++;
+        console.log("the game has displayed " + gameData.answered +" questions");
+        //nextQuestion();
+    }
+    
+}
 //event listener for when user clicks the begin quiz button
 //will display a question and a list of answers
 startButton.addEventListener("click", function(event) {
@@ -193,4 +350,6 @@ startButton.addEventListener("click", function(event) {
     listAnswers(questionNumber);
 })
 
+function gameOver() {
 
+}
