@@ -180,7 +180,7 @@ function nextQuestion() {
     }    
 }
 
-
+//same answer selector logic as earlier, this will display all further questions/answers after the first quesiton
 function nextAnswer(answered) {
     let ansArray;
     let testArray = Object.entries(gameData.answers);
