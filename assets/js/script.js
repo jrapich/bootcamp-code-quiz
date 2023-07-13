@@ -26,78 +26,78 @@ const gameData = {
     timer: 121,
     isGameEnded: false,
     questions: [
-        "placeholder 0",
-        "placeholder 1",
-        "placeholder 2",
-        "placeholder 3",
-        "placeholder 4",
-        "placeholder 5",
-        "placeholder 6",
-        "placeholder 7",
-        "placeholder 8",
-        "placeholder 9",
+        "In Javascript, what is the DOM stand for?",
+        "Javascript is able to manipulate the DOM and the page by using the _______ built into modern browsers.",
+        "What is an API? and what does it do?",
+        "what tool in Javascript can you use to iterate through massive lists of items or data?",
+        "True or False: Web API is a series of built-in methods and functions we can call to edit the DOM.",
+        "What can we create to have Javascript detect when a user clicks on a button?",
+        "What websites can we reference if we don't quite understand what a bit of code does?",
+        "What syntax do we use when declaring a variable with a value we never want to change in the script?",
+        "Select an example of an anonymous callback function:",
+        "This test will store your total score and your initials, and will still be visible even if you close the browser and return to it. Where could this data be stored?",
     ],
     answered: 0,
     answers: {
         answer0: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "Document Oriented Model",
+            "Digital Ordered Marketing",
+            "Document Object Model",
+            "I've never heard of that before in my life!"
         ],
         answer1: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "script.js file",
+            "Google API",
+            "Web API",
+            "MDN HTML documentation"
         ],
         answer2: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "Application Programming Interface, it records data sent/receive to the webserver",
+            "Application Programmable Instructions, it is used to send different instructions to programmable code",
+            "Application Programming Interface, it is an interface programming languages can access to send/receive/modify data",
+            "I don't remember!!"
         ],
         answer3: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "a data-iteration array",
+            "a data-iteration object",
+            "a Web API DOM navigator",
+            "a for/while loop"
         ],
         answer4: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "True!",
+            "False!",
+            "",
+            ""
         ],
         answer5: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "An API attached to the button",
+            "An element in the DOM",
+            "An Event Listener",
+            "A Media Query in the CSS file"
         ],
         answer6: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "The Mozilla MDN documentation for JavaScript",
+            "W3Schools website documentation",
+            "stack exchange",
+            "all of the above"
         ],
         answer7: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "let",
+            "const",
+            "var",
+            "none of the above"
         ],
         answer8: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "var myFunction = function() {<function code here>}",
+            "function myFunction () {<function code here>}",
+            "addEventListener('click', function (event) {<function code here>})",
+            "none of these are anonymous callbacks"
         ],
         answer9: [
-            "placeholder0",
-            "placeholder1",
-            "placeholder2",
-            "placeholder3"
+            "in a cookie",
+            "in a javascript const variable",
+            "in the javascript local storage",
+            "in the cloud"
         ]
     }
 } 
