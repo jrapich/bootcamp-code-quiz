@@ -283,7 +283,7 @@ function gameOver() {
     headerElem.removeChild(timerText);
     highScoresElem.setAttribute("id", "#highScores");
     highScoresElem.setAttribute("style",
-    "display:flex; flex-direction:column; align-items:center; max-width:600px;");
+    "display:flex; flex-direction:column; align-items:center; max-width:800px;");
     container.appendChild(highScoresElem);
     scoreForm.addEventListener("submit", function(event) {
         event.preventDefault();
