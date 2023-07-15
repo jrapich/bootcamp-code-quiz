@@ -1,4 +1,5 @@
 //lets declare all the things
+let container = document.querySelector(".container")
 let headerElem = document.querySelector("header");
 let quizSpace = document.querySelector("main");
 let defaultQuestions = document.querySelector("#questionsDefault");
@@ -6,6 +7,8 @@ let defaultAnswers = document.querySelector("#answersDefault");
 let startButton = document.querySelector(".confirm");
 let displayedQuestion = document.querySelector("#questionsDisplay");
 let displayedAnswers = document.querySelector("#answersDisplay");
+let scoreForm = document.querySelector("#scoreForm");
+let inits = document.querySelector("#inits");
 let answer0 = document.querySelector("#answer0");
 let answer1 = document.querySelector("#answer1");
 let answer2 = document.querySelector("#answer2");
@@ -20,7 +23,6 @@ let answer2Btn = answer2.querySelector("span");
 let answer3Btn = answer3.querySelector("span");
 let answerBtnArray = [answer0Btn, answer1Btn, answer2Btn, answer3Btn];
 let clickableButton = [];
-let firstQuestion;
 //object that contains all data needed for the gameshow
 //this used to bigger and more complex logic but trimmed a lot of it to save uneeded complexity
 const gameData = {
@@ -28,6 +30,9 @@ const gameData = {
     isGameEnded: false,
     correctAnswer: 2,
     totalScore: 0,
+    setScore: [],
+    getScore: [],
+    highScores: [],
     questions: [
         "In Javascript, what is the DOM stand for?",
         "Javascript is able to manipulate the DOM and the page by using the _______ built into modern browsers.",
@@ -120,9 +125,11 @@ function startTimer() {
     let timerInterval = setInterval(function() {
         timerElem.textContent = gameData.timer;
         gameData.timer--;
-        if(gameData.timer <= -2) {
+        if(gameData.timer <= -2 || gameData.answered > 10) {
           clearInterval(timerInterval);
-          gameOver();
+          if (!gameData.isGameEnded) {
+            gameOver();
+          }
         }
     }, 1000);
     timerText.textContent = "Seconds Remaining:"
@@ -214,11 +221,11 @@ startButton.addEventListener("click", function(event) {
     event.preventDefault();
     hideDefaultText();
     startTimer();
-    firstQuestion = gameData.questions[0];
-    displayedQuestion.textContent = firstQuestion;
+    displayedQuestion.textContent = gameData.questions[0];
     listAnswers(0);
 })
 
+//sets the correct answer to a question to the necessary answers index
 function wrongAnswers (currentQuestion) {
     switch(currentQuestion) {
         case 0:
@@ -257,18 +264,45 @@ function wrongAnswers (currentQuestion) {
     return gameData.correctAnswer;
 }
 
+//the game is over! lets remove all quiz elements, display the score,
+//and allow the user to save their score and initials to the JS localStorage
 function gameOver() {
     let displayScore = document.getElementById("#rightOrWrong");
     let timerElem = document.querySelector("#timerElement");
     let timerText = document.querySelector("#timerText");
-    let buttonElement = document.createElement("button");
-    let formElement = document.createElement("form");
-    let highScoresElement = document.createElement("div");
+    let highScoresElem = document.createElement("div");
+    gameData.isGameEnded = true;
     displayScore.textContent = `Quiz is over! Your total score is ${gameData.totalScore}/10`;
+    scoreForm.setAttribute("style", "display:block;");
     quizSpace.removeChild(defaultQuestions);
     quizSpace.removeChild(defaultAnswers);
     quizSpace.removeChild(displayedQuestion);
     quizSpace.removeChild(displayedAnswers);
     headerElem.removeChild(timerElem);
     headerElem.removeChild(timerText);
+    highScoresElem.setAttribute("id", "#highScores");
+    highScoresElem.setAttribute("style",
+    "display:flex; flex-direction:column; align-items:center;");
+    container.appendChild(highScoresElem);
+    scoreForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        quizSpace.removeChild(scoreForm);
+        displayScore.textContent = "Your score has been saved! Refresh the page to take the quiz again."
+
+        //store the score and initials in an array. add the array to local storage
+        //if the local storage array already exists, add the recent game's score to it 
+        gameData.setScore.push(`Score: ${gameData.totalScore} Initials: ${inits.value}`);
+        console.log(gameData.setScore);
+        if (!localStorage.getItem("highScores")) {
+            localStorage.setItem("highScores", JSON.stringify(gameData.setScore));
+            console.log("localstorage created");
+        } else {
+            console.log("localstorage already exists");
+            gameData.getScore = JSON.parse(localStorage.getItem("highScores"));
+            gameData.getScore.push(`Score: ${gameData.totalScore} Initials: ${inits.value}`);
+            console.log(gameData.getScore);
+            localStorage.setItem("highScores", JSON.stringify(gameData.getScore));
+        }
+    })
 }

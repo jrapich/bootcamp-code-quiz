@@ -38,3 +38,7 @@ header {
 .confirm {
     text-align: center;
 }
+
+#scoreForm {
+    display:none;
+}
