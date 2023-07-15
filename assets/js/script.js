@@ -23,8 +23,9 @@ let firstQuestion;
 //object that contains all data needed for the gameshow
 //this used to bigger and more complex logic but trimmed a lot of it to save uneeded complexity
 const gameData = {
-    timer: 121,
+    timer: 120,
     isGameEnded: false,
+    correctAnswer: 2,
     questions: [
         "In Javascript, what is the DOM stand for?",
         "Javascript is able to manipulate the DOM and the page by using the _______ built into modern browsers.",
@@ -151,6 +152,7 @@ function listAnswers(question) {
     answer1p.textContent = ansArray[1];
     answer2p.textContent = ansArray[2];
     answer3p.textContent = ansArray[3];
+    wrongAnswers(0);
     gameData.answered++;
     //add a clickable button to each of these answers
         //first time I tried this it only added one button, so lets make a for loop
@@ -167,6 +169,9 @@ function listAnswers(question) {
 function nextQuestion() {
     for (let j=0; j < clickableButton.length; j++) {
         clickableButton[j].addEventListener("click", function(event) {
+            if (j != gameData.correctAnswer) {
+                gameData.timer = gameData.timer - 10;
+            }
             nextAnswer(gameData.answered);
         })
     }    
@@ -186,6 +191,7 @@ function nextAnswer(answered) {
         answer2p.textContent = ansArray[2];
         answer3p.textContent = ansArray[3];
         displayedQuestion.textContent = gameData.questions[answered];
+        wrongAnswers(gameData.answered);
         gameData.answered++;
         console.log("the game has displayed " + gameData.answered +" questions");
     }
@@ -202,6 +208,44 @@ startButton.addEventListener("click", function(event) {
     displayedQuestion.textContent = firstQuestion;
     listAnswers(0);
 })
+
+function wrongAnswers (currentQuestion) {
+    switch(currentQuestion) {
+        case 0:
+        gameData.correctAnswer = 2;
+        break;
+        case 1:
+        gameData.correctAnswer = 2;
+        break;
+        case 2:
+        gameData.correctAnswer = 2;
+        break;
+        case 3:
+        gameData.correctAnswer = 3;
+        break;
+        case 4:
+        gameData.correctAnswer = 0;
+        break;
+        case 5:
+        gameData.correctAnswer = 2;
+        break;
+        case 6:
+        gameData.correctAnswer = 3;
+        break;
+        case 7:
+        gameData.correctAnswer = 1;
+        break;
+        case 8:
+        gameData.correctAnswer = 2;
+        break;
+        case 9:
+        gameData.correctAnswer = 2;
+        break;
+        default:
+        gameData.correctAnswer = null;
+    }
+    return gameData.correctAnswer;
+}
 
 function gameOver() {
 
