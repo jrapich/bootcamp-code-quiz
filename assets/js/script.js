@@ -290,9 +290,9 @@ function gameOver() {
 
         quizSpace.removeChild(scoreForm);
         displayScore.textContent = "Your score has been saved! Refresh the page to take the quiz again."
-
         //store the score and initials in an array. add the array to local storage
         //if the local storage array already exists, add the recent game's score to it 
+        //if the localstorage has more than 10 scores, remove the oldest entry
         gameData.setScore.push(`Score: ${gameData.totalScore} Initials: ${inits.value}`);
         console.log(gameData.setScore);
         if (!localStorage.getItem("highScores")) {
