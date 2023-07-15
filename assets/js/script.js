@@ -270,7 +270,8 @@ function gameOver() {
     let displayScore = document.getElementById("#rightOrWrong");
     let timerElem = document.querySelector("#timerElement");
     let timerText = document.querySelector("#timerText");
-    let highScoresElem = document.createElement("div");
+    let highScoresElem = document.createElement("h3");
+    let highScoreItems;
     gameData.isGameEnded = true;
     displayScore.textContent = `Quiz is over! Your total score is ${gameData.totalScore}/10`;
     scoreForm.setAttribute("style", "display:block;");
@@ -282,7 +283,7 @@ function gameOver() {
     headerElem.removeChild(timerText);
     highScoresElem.setAttribute("id", "#highScores");
     highScoresElem.setAttribute("style",
-    "display:flex; flex-direction:column; align-items:center;");
+    "display:flex; flex-direction:column; align-items:center; max-width:600px;");
     container.appendChild(highScoresElem);
     scoreForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -301,8 +302,20 @@ function gameOver() {
             console.log("localstorage already exists");
             gameData.getScore = JSON.parse(localStorage.getItem("highScores"));
             gameData.getScore.push(`Score: ${gameData.totalScore} Initials: ${inits.value}`);
+            if (gameData.getScore.length > 10) {
+                gameData.getScore = gameData.getScore.slice(1,11);
+            }
             console.log(gameData.getScore);
+            console.log(gameData.getScore.length);
             localStorage.setItem("highScores", JSON.stringify(gameData.getScore));
+        }
+
+        //once the user submits their initials, display the last 10 high scores
+        highScoresElem.textContent = "High Scores:"
+        for (v=0; v <= gameData.getScore.length; v++) {
+            highScoreItems = document.createElement("div");
+            highScoreItems.textContent = gameData.getScore[v];
+            highScoresElem.appendChild(highScoreItems);
         }
     })
 }
