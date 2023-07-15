@@ -1,8 +1,9 @@
 //lets declare all the things
+let headerElem = document.querySelector("header");
 let quizSpace = document.querySelector("main");
-let startButton = document.querySelector(".confirm");
 let defaultQuestions = document.querySelector("#questionsDefault");
 let defaultAnswers = document.querySelector("#answersDefault");
+let startButton = document.querySelector(".confirm");
 let displayedQuestion = document.querySelector("#questionsDisplay");
 let displayedAnswers = document.querySelector("#answersDisplay");
 let answer0 = document.querySelector("#answer0");
@@ -26,6 +27,7 @@ const gameData = {
     timer: 120,
     isGameEnded: false,
     correctAnswer: 2,
+    totalScore: 0,
     questions: [
         "In Javascript, what is the DOM stand for?",
         "Javascript is able to manipulate the DOM and the page by using the _______ built into modern browsers.",
@@ -113,19 +115,19 @@ function hideDefaultText() {
 
 //start the quiz timer, display the time remaining, and then remove the time remaining when time runs out
 function startTimer() {
-    let headerElem = document.querySelector("header");
     let timerText = document.createElement("div");
     let timerElem = document.createElement("span");
     let timerInterval = setInterval(function() {
         timerElem.textContent = gameData.timer;
         gameData.timer--;
-        if(gameData.timer === 0) {
+        if(gameData.timer <= -2) {
           clearInterval(timerInterval);
-          timerText.setAttribute("style", "display:none");
-          timerElem.setAttribute("style", "display:none");
+          gameOver();
         }
     }, 1000);
     timerText.textContent = "Seconds Remaining:"
+    timerText.setAttribute("id", "timerText");
+    timerElem.setAttribute("id", "timerElement");
     headerElem.appendChild(timerText);
     headerElem.appendChild(timerElem);
     quizSpace.removeChild(startButton); 
@@ -178,6 +180,7 @@ function nextQuestion() {
             gameData.timer = gameData.timer - 10;
         } else {
             rightOrWrong.textContent = "Correct!";
+            gameData.totalScore ++;
         }
             nextAnswer(gameData.answered);
         })
@@ -188,7 +191,7 @@ function nextQuestion() {
 function nextAnswer(answered) {
     let ansArray;
     let testArray = Object.entries(gameData.answers);
-    if (gameData.isGameEnded) {
+    if (gameData.answered >= 10) {
         gameOver();
     } else  {
         ansArray = testArray[answered];
@@ -255,5 +258,17 @@ function wrongAnswers (currentQuestion) {
 }
 
 function gameOver() {
-    
+    let displayScore = document.getElementById("#rightOrWrong");
+    let timerElem = document.querySelector("#timerElement");
+    let timerText = document.querySelector("#timerText");
+    let buttonElement = document.createElement("button");
+    let formElement = document.createElement("form");
+    let highScoresElement = document.createElement("div");
+    displayScore.textContent = `Quiz is over! Your total score is ${gameData.totalScore}/10`;
+    quizSpace.removeChild(defaultQuestions);
+    quizSpace.removeChild(defaultAnswers);
+    quizSpace.removeChild(displayedQuestion);
+    quizSpace.removeChild(displayedAnswers);
+    headerElem.removeChild(timerElem);
+    headerElem.removeChild(timerText);
 }
