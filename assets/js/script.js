@@ -146,6 +146,7 @@ function listAnswers(question) {
     let ansArray;
     let testArray = Object.entries(gameData.answers);
     let createBtn;
+    let createRightOrWrong = document.createElement("div");
     ansArray = testArray[question];
     ansArray = ansArray[1];
     answer0p.textContent = ansArray[0];
@@ -164,17 +165,23 @@ function listAnswers(question) {
         clickableButton.push(answerBtnArray[i].querySelector("button"));
     } 
     nextQuestion();
+    createRightOrWrong.setAttribute("id", "#rightOrWrong");
+    quizSpace.appendChild(createRightOrWrong);
 }
 //add an event listener for each clickable button in the quiz
 function nextQuestion() {
     for (let j=0; j < clickableButton.length; j++) {
         clickableButton[j].addEventListener("click", function(event) {
+            let rightOrWrong = document.getElementById("#rightOrWrong");
             if (j != gameData.correctAnswer) {
-                gameData.timer = gameData.timer - 10;
-            }
+            rightOrWrong.textContent = "Incorrect!";
+            gameData.timer = gameData.timer - 10;
+        } else {
+            rightOrWrong.textContent = "Correct!";
+        }
             nextAnswer(gameData.answered);
         })
-    }    
+    }
 }
 
 //same answer selector logic as earlier, this will display all further questions/answers after the first quesiton
@@ -248,5 +255,5 @@ function wrongAnswers (currentQuestion) {
 }
 
 function gameOver() {
-
+    
 }
