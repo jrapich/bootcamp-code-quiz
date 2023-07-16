@@ -26,6 +26,7 @@ Here is a link to the project repository:
 Attached is a screenshot of the deployed website:
 
 [Screenshot](./assets/images/screenshot.jpg)
+![Screenshot](./assets/images/screenshot.jpg)
 
 ## Credits
 
